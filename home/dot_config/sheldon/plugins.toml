@@ -18,9 +18,9 @@ apply = ["defer"]
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
 
-[plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
-apply = ["defer"]
+# NOTE: zsh-autocomplete removed — it aggressively hijacks the completion
+# system and is known to freeze shells. fzf-tab + zsh-completions +
+# zsh-autosuggestions give a better experience without the hangs.
 
 # 2. Syntax highlighting (must load after completions)
 [plugins.fast-syntax-highlighting]
@@ -189,18 +189,14 @@ github = "ohmyzsh/ohmyzsh"
 dir = "plugins/copypath"
 apply = ["defer"]
 
-# ---------------------------------------------------------------------------
-# 18. Notifications for long-running commands
-# ---------------------------------------------------------------------------
-[plugins.zsh-notify]
-github = "marzocchi/zsh-notify"
-apply = ["defer"]
+# NOTE: zsh-notify removed — hangs without terminal-notifier / notify-send.
+# Use cmd_duration in starship prompt instead for long-command awareness.
 
 # ---------------------------------------------------------------------------
 # 19. You-should-use — reminds you of existing aliases
 # ---------------------------------------------------------------------------
 [plugins.you-should-use]
-github = "MichaelAqworter/zsh-you-should-use"
+github = "MichaelAquilina/zsh-you-should-use"
 apply = ["defer"]
 
 # ---------------------------------------------------------------------------
