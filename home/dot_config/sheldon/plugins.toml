@@ -200,7 +200,7 @@ apply = ["defer"]
 # 19. You-should-use — reminds you of existing aliases
 # ---------------------------------------------------------------------------
 [plugins.you-should-use]
-github = "MichaelAqworter/zsh-you-should-use"
+github = "MichaelAquilina/zsh-you-should-use"
 apply = ["defer"]
 
 # ---------------------------------------------------------------------------
