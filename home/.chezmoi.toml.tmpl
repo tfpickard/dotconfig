@@ -1,0 +1,10 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $name := promptStringOnce . "name" "Full name" -}}
+{{- $is_remote := promptBoolOnce . "is_remote" "Is this a remote/server host (no GUI)" -}}
+
+[data]
+  email = {{ $email | quote }}
+  name = {{ $name | quote }}
+  is_remote = {{ $is_remote }}
+  is_macos = {{ eq .chezmoi.os "darwin" | not | not }}
+  is_linux = {{ eq .chezmoi.os "linux" | not | not }}

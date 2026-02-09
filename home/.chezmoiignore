@@ -1,0 +1,13 @@
+# Ignore README/LICENSE from the repo root (they are not dotfiles)
+README.md
+LICENSE
+.git
+.gitignore
+
+# OS-specific ignores
+{{- if ne .chezmoi.os "darwin" }}
+Library/
+{{- end }}
+{{- if ne .chezmoi.os "linux" }}
+.config/systemd/
+{{- end }}

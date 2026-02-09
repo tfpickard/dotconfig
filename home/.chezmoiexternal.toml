@@ -1,0 +1,6 @@
+# ==========================================================================
+#  chezmoi externals — tools managed outside the dotfiles repo
+# ==========================================================================
+
+# Sheldon is installed via the bootstrap script; its plugin lock is ephemeral.
+# Nothing else needed here for now — extend as desired.
