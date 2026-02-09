@@ -189,14 +189,96 @@ github = "ohmyzsh/ohmyzsh"
 dir = "plugins/copypath"
 apply = ["defer"]
 
-# NOTE: zsh-notify removed — hangs without terminal-notifier / notify-send.
-# Use cmd_duration in starship prompt instead for long-command awareness.
+[plugins.copyfile]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/copyfile"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 18. sudo — double-tap ESC to prepend sudo
+# ---------------------------------------------------------------------------
+[plugins.sudo-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/sudo"
+apply = ["defer"]
 
 # ---------------------------------------------------------------------------
 # 19. You-should-use — reminds you of existing aliases
 # ---------------------------------------------------------------------------
 [plugins.you-should-use]
 github = "MichaelAquilina/zsh-you-should-use"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 20. extract — universal archive extraction
+# ---------------------------------------------------------------------------
+[plugins.extract-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/extract"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 21. web-search — search from terminal (google, ddg, github, etc.)
+# ---------------------------------------------------------------------------
+[plugins.web-search]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/web-search"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 22. encode64 — base64 encode/decode helpers
+# ---------------------------------------------------------------------------
+[plugins.encode64]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/encode64"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 23. safe-paste — prevent running pasted commands immediately
+# ---------------------------------------------------------------------------
+[plugins.safe-paste]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/safe-paste"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 24. command-not-found — suggest package installs for unknown commands
+# ---------------------------------------------------------------------------
+[plugins.command-not-found]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/command-not-found"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 25. jsontools — pp_json, is_json, urlencode, urldecode
+# ---------------------------------------------------------------------------
+[plugins.jsontools]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/jsontools"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 26. aliases — list all aliases with `als`
+# ---------------------------------------------------------------------------
+[plugins.aliases-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/aliases"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 27. globalias — expand aliases inline with space
+# ---------------------------------------------------------------------------
+[plugins.globalias]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/globalias"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 28. rsync — rsync shortcuts
+# ---------------------------------------------------------------------------
+[plugins.rsync-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/rsync"
 apply = ["defer"]
 
 # ---------------------------------------------------------------------------

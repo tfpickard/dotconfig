@@ -133,8 +133,10 @@ export ZSH_TMUX_AUTOCONNECT=true
 export ZSH_TMUX_UNICODE=true
 
 # Auto-attach is opt-in: set TMUX_AUTOSTART=1 in ~/.zshrc.local to enable
+# Guard: only when stdin is a real terminal (-t 0) to avoid
+# "open terminal failed: not a terminal" in non-TTY contexts
 if [[ -n "$TMUX_AUTOSTART" ]] && command -v tmux &>/dev/null \
-   && [[ -z "$TMUX" && -z "$VSCODE_PID" && -z "$INTELLIJ_ENVIRONMENT_READER" ]]; then
+   && [[ -t 0 && -z "$TMUX" && -z "$VSCODE_PID" && -z "$INTELLIJ_ENVIRONMENT_READER" ]]; then
   exec tmux new-session -A -s default
 fi
 

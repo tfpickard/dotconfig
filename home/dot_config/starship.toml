@@ -6,28 +6,38 @@
 palette = "catppuccin_mocha"
 
 # --------------------------------------------------------------------------
-# Layout — two-line, powerline arrows, no background fade
+# Layout — two-line, powerline arrows, icon-heavy
 # --------------------------------------------------------------------------
 format = """
 [╭─](overlay0)\
 $os\
 $username\
 $hostname\
-[ ](fg:surface2 bg:surface1)\
+[](fg:surface2 bg:surface1)\
 $directory\
-[ ](fg:surface1 bg:surface0)\
+[](fg:surface1 bg:surface0)\
 $git_branch\
 $git_status\
 $git_state\
-[ ](fg:surface0)\
+[](fg:surface0 bg:mantle)\
 $docker_context\
 $python\
 $nodejs\
+$rust\
+$golang\
+$lua\
+$java\
+$ruby\
+$php\
+$c\
 $aws\
+$kubernetes\
+[](fg:mantle)\
 $fill\
 $git_metrics\
 $jobs\
 $cmd_duration\
+$time\
 $status\
 $line_break\
 [╰─](overlay0)\
@@ -37,22 +47,22 @@ add_newline = true
 continuation_prompt = "[  ┊](overlay0) "
 
 [fill]
-symbol = "·"
+symbol = "─"
 style = "overlay0"
 
 # --------------------------------------------------------------------------
-# Character — vi mode
+# Character — vi mode with NF icons
 # --------------------------------------------------------------------------
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold blue)"
-vimcmd_replace_one_symbol = "[❮](bold mauve)"
-vimcmd_replace_symbol = "[❮](bold mauve)"
-vimcmd_visual_symbol = "[❮](bold yellow)"
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+vimcmd_symbol = "[](bold blue)"
+vimcmd_replace_one_symbol = "[](bold mauve)"
+vimcmd_replace_symbol = "[](bold mauve)"
+vimcmd_visual_symbol = "[󰈈](bold yellow)"
 
 # --------------------------------------------------------------------------
-# OS
+# OS — NF distro logos
 # --------------------------------------------------------------------------
 [os]
 disabled = false
@@ -71,24 +81,29 @@ Amazon = ""
 CentOS = ""
 Raspbian = ""
 Windows = ""
+NixOS = ""
+Gentoo = ""
+openSUSE = ""
+Redhat = "󱄛"
+Void = ""
 
 # --------------------------------------------------------------------------
 # Username & hostname — visible on SSH / root
 # --------------------------------------------------------------------------
 [username]
 show_always = false
-format = "[ $user](fg:peach bg:surface2)"
+format = "[ 󰀄 $user](fg:peach bg:surface2)"
 style_user = "fg:peach bg:surface2"
 style_root = "fg:red bg:surface2"
 
 [hostname]
 ssh_only = true
-format = "[@$hostname ](fg:peach bg:surface2)"
+format = "[  $hostname ](fg:peach bg:surface2)"
 style = "fg:peach bg:surface2"
 trim_at = "."
 
 # --------------------------------------------------------------------------
-# Directory
+# Directory — folder icons + smart substitutions
 # --------------------------------------------------------------------------
 [directory]
 truncation_length = 4
@@ -97,15 +112,25 @@ truncate_to_repo = true
 style = "fg:blue bg:surface1"
 read_only = " 󰌾"
 read_only_style = "fg:red bg:surface1"
+home_symbol = " ~"
 format = "[ $path]($style)[$read_only]($read_only_style)[ ](bg:surface1)"
 
 [directory.substitutions]
 "Documents" = "󰈙 "
-"Downloads" = " "
+"Downloads" = "󰇚 "
 "Projects"  = " "
+"Desktop"   = "󰇄 "
+"Music"     = "󰝚 "
+"Pictures"  = "󰋩 "
+"Videos"    = "󰕧 "
+".config"   = " "
+"src"       = " "
+"test"      = "󰙨 "
+"tests"     = "󰙨 "
+"node_modules" = " "
 
 # --------------------------------------------------------------------------
-# Git
+# Git — branch + status icons
 # --------------------------------------------------------------------------
 [git_branch]
 symbol = " "
@@ -116,16 +141,16 @@ truncation_length = 30
 [git_status]
 format = '([$all_status$ahead_behind ](fg:yellow bg:surface0))'
 style = "fg:yellow bg:surface0"
-conflicted = " "
-ahead = "↑${count}"
-behind = "↓${count}"
-diverged = "↕↑${ahead_count}↓${behind_count}"
-untracked = "?${count}"
-stashed = "≡${count}"
-modified = "!${count}"
-staged = "+${count}"
-renamed = "»${count}"
-deleted = "✕${count}"
+conflicted = "󰞇 "
+ahead = "󰜸 ${count}"
+behind = "󰜯 ${count}"
+diverged = "󰃻 ↑${ahead_count}↓${behind_count}"
+untracked = "󰋗 ${count}"
+stashed = "󰏗 ${count}"
+modified = "󰏫 ${count}"
+staged = "󰐕 ${count}"
+renamed = "󰑕 ${count}"
+deleted = "󰍷 ${count}"
 
 [git_state]
 format = '[\($state $progress_current/$progress_total\) ](fg:peach bg:surface0)'
@@ -133,7 +158,7 @@ style = "fg:peach bg:surface0"
 
 [git_metrics]
 disabled = false
-format = "([+$added](green) )([-$deleted](red) )"
+format = "([󰐕 $added](green) )([󰍷 $deleted](red) )"
 added_style = "green"
 deleted_style = "red"
 
@@ -142,8 +167,8 @@ deleted_style = "red"
 # --------------------------------------------------------------------------
 [docker_context]
 symbol = "󰡨 "
-format = "[$symbol$context ](sky)"
-style = "sky"
+format = "[$symbol$context ](fg:sky bg:mantle)"
+style = "fg:sky bg:mantle"
 only_with_files = true
 detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", "compose.yml", "compose.yaml"]
 
@@ -152,8 +177,8 @@ detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", "comp
 # --------------------------------------------------------------------------
 [python]
 symbol = " "
-format = '[$symbol${pyenv_prefix}${version}( \($virtualenv\)) ](yellow)'
-style = "yellow"
+format = '[$symbol${pyenv_prefix}${version}( \($virtualenv\)) ](fg:yellow bg:mantle)'
+style = "fg:yellow bg:mantle"
 pyenv_version_name = true
 detect_extensions = ["py"]
 detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
@@ -162,19 +187,85 @@ detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.tx
 # Node.js
 # --------------------------------------------------------------------------
 [nodejs]
-symbol = " "
-format = "[$symbol$version ](green)"
-style = "green"
+symbol = "󰎙 "
+format = "[$symbol$version ](fg:green bg:mantle)"
+style = "fg:green bg:mantle"
 detect_extensions = ["js", "mjs", "cjs", "ts"]
 detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+# --------------------------------------------------------------------------
+# Rust
+# --------------------------------------------------------------------------
+[rust]
+symbol = "󱘗 "
+format = "[$symbol$version ](fg:red bg:mantle)"
+style = "fg:red bg:mantle"
+
+# --------------------------------------------------------------------------
+# Go
+# --------------------------------------------------------------------------
+[golang]
+symbol = "󰟓 "
+format = "[$symbol$version ](fg:sky bg:mantle)"
+style = "fg:sky bg:mantle"
+
+# --------------------------------------------------------------------------
+# Lua
+# --------------------------------------------------------------------------
+[lua]
+symbol = "󰢱 "
+format = "[$symbol$version ](fg:blue bg:mantle)"
+style = "fg:blue bg:mantle"
+
+# --------------------------------------------------------------------------
+# Java
+# --------------------------------------------------------------------------
+[java]
+symbol = " "
+format = "[$symbol$version ](fg:red bg:mantle)"
+style = "fg:red bg:mantle"
+
+# --------------------------------------------------------------------------
+# Ruby
+# --------------------------------------------------------------------------
+[ruby]
+symbol = " "
+format = "[$symbol$version ](fg:red bg:mantle)"
+style = "fg:red bg:mantle"
+
+# --------------------------------------------------------------------------
+# PHP
+# --------------------------------------------------------------------------
+[php]
+symbol = "󰌟 "
+format = "[$symbol$version ](fg:lavender bg:mantle)"
+style = "fg:lavender bg:mantle"
+
+# --------------------------------------------------------------------------
+# C
+# --------------------------------------------------------------------------
+[c]
+symbol = " "
+format = "[$symbol$version ](fg:blue bg:mantle)"
+style = "fg:blue bg:mantle"
+
+# --------------------------------------------------------------------------
+# Kubernetes
+# --------------------------------------------------------------------------
+[kubernetes]
+disabled = false
+symbol = "󱃾 "
+format = '[$symbol$context( \($namespace\)) ](fg:sapphire bg:mantle)'
+style = "fg:sapphire bg:mantle"
+detect_files = ["k8s", "kubernetes", "kustomization.yaml"]
 
 # --------------------------------------------------------------------------
 # AWS
 # --------------------------------------------------------------------------
 [aws]
-symbol = " "
-format = '[$symbol$profile( \($region\)) ](peach)'
-style = "peach"
+symbol = "󰸏 "
+format = '[$symbol$profile( \($region\)) ](fg:peach bg:mantle)'
+style = "fg:peach bg:mantle"
 
 [aws.region_aliases]
 us-east-1      = "use1"
@@ -195,6 +286,15 @@ style = "peach"
 show_notifications = false
 
 # --------------------------------------------------------------------------
+# Time — clock on the right
+# --------------------------------------------------------------------------
+[time]
+disabled = false
+format = "[󰥔 $time](subtext0) "
+style = "subtext0"
+time_format = "%H:%M"
+
+# --------------------------------------------------------------------------
 # Background jobs
 # --------------------------------------------------------------------------
 [jobs]
@@ -208,7 +308,7 @@ threshold = 1
 # --------------------------------------------------------------------------
 [status]
 disabled = false
-format = "[ $status](red) "
+format = "[󰚌 $status](red) "
 symbol = ""
 style = "red"
 map_symbol = true
