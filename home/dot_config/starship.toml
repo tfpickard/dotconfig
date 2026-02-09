@@ -1,31 +1,29 @@
 # ==========================================================================
-#  Starship prompt — sleek arrows, pipes, icons, vi-mode aware
+#  Starship prompt — sleek, standard Unicode (no Nerd Fonts required)
 #  Docs: https://starship.rs/config/
 # ==========================================================================
 
-# Palette selection (definition is at the bottom of this file)
 palette = "catppuccin_mocha"
 
 # --------------------------------------------------------------------------
-# Layout — two-line prompt with powerline arrows
+# Layout — two-line prompt with box-drawing frame
 # --------------------------------------------------------------------------
 format = """
 [╭─](overlay0)\
 $os\
 $username\
 $hostname\
-[](surface1)\
-[ ](bg:surface1 fg:blue)$directory\
-[](fg:surface1 bg:surface0)\
+[▓▒░](surface2)\
+$directory\
+[▓▒░](surface1)\
 $git_branch\
 $git_status\
 $git_state\
-[](fg:surface0 bg:crust)\
+[▓▒░](surface0)\
 $docker_context\
 $python\
 $nodejs\
 $aws\
-[](fg:crust)\
 $fill\
 $git_metrics\
 $jobs\
@@ -36,43 +34,43 @@ $line_break\
 $character"""
 
 add_newline = true
-continuation_prompt = "[  ┆](overlay0) "
+continuation_prompt = "[  ┊](overlay0) "
 
 [fill]
 symbol = "·"
 style = "overlay0"
 
 # --------------------------------------------------------------------------
-# Character — vi mode arrows
+# Character — vi mode indicators
 # --------------------------------------------------------------------------
 [character]
-success_symbol = "[](bold green)"
-error_symbol = "[](bold red)"
-vimcmd_symbol = "[](bold blue)"
-vimcmd_replace_one_symbol = "[](bold mauve)"
-vimcmd_replace_symbol = "[](bold mauve)"
-vimcmd_visual_symbol = "[](bold yellow)"
+success_symbol = "[▶](bold green)"
+error_symbol = "[▶](bold red)"
+vimcmd_symbol = "[◀](bold blue)"
+vimcmd_replace_one_symbol = "[◆](bold mauve)"
+vimcmd_replace_symbol = "[◆](bold mauve)"
+vimcmd_visual_symbol = "[◇](bold yellow)"
 
 # --------------------------------------------------------------------------
-# OS — leading icon
+# OS
 # --------------------------------------------------------------------------
 [os]
 disabled = false
-format = "[ $symbol](fg:text bg:surface2)"
+format = "[$symbol](fg:text bg:surface2)"
 style = "fg:text bg:surface2"
 
 [os.symbols]
-Macos = ""
-Linux = ""
-Ubuntu = ""
-Debian = ""
-Fedora = ""
-Arch = "󰣇"
-Alpine = ""
-Amazon = ""
-CentOS = ""
-Raspbian = ""
-Windows = ""
+Macos = "⌘ "
+Linux = "⊞ "
+Ubuntu = "⊙ "
+Debian = "◈ "
+Fedora = "⊕ "
+Arch = "△ "
+Alpine = "▲ "
+Amazon = "⧫ "
+CentOS = "◉ "
+Raspbian = "● "
+Windows = "⊞ "
 
 # --------------------------------------------------------------------------
 # Username & hostname — visible on SSH / root
@@ -97,21 +95,21 @@ truncation_length = 4
 truncation_symbol = "…/"
 truncate_to_repo = true
 style = "fg:blue bg:surface1"
-read_only = " 󰌾"
+read_only = " ⊘"
 read_only_style = "fg:red bg:surface1"
-format = "[$path]($style)[$read_only]($read_only_style)[ ](bg:surface1)"
+format = "[ $path]($style)[$read_only]($read_only_style)[ ](bg:surface1)"
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Projects"  = " "
-"~"         = " "
+"Documents" = "◇ "
+"Downloads" = "↓ "
+"Projects"  = "⬡ "
+"~"         = "~ "
 
 # --------------------------------------------------------------------------
-# Git — branch + status in powerline segment
+# Git
 # --------------------------------------------------------------------------
 [git_branch]
-symbol = " "
+symbol = "⎇ "
 format = "[ $symbol$branch(:$remote_branch) ](fg:mauve bg:surface0)"
 style = "fg:mauve bg:surface0"
 truncation_length = 30
@@ -119,16 +117,16 @@ truncation_length = 30
 [git_status]
 format = '([$all_status$ahead_behind ](fg:yellow bg:surface0))'
 style = "fg:yellow bg:surface0"
-conflicted = "󰞇 "
-ahead = "󰜸 ${count}"
-behind = "󰜯 ${count}"
-diverged = "󰃻 ${ahead_count}↑${behind_count}↓"
-untracked = "󰋗 ${count}"
-stashed = "󰏗 ${count}"
-modified = "󰏫 ${count}"
-staged = "󰐕 ${count}"
-renamed = "󰑕 ${count}"
-deleted = "󰍴 ${count}"
+conflicted = "⚡"
+ahead = "↑${count}"
+behind = "↓${count}"
+diverged = "⇅ ↑${ahead_count}↓${behind_count}"
+untracked = "?${count}"
+stashed = "≡${count}"
+modified = "△${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✕${count}"
 
 [git_state]
 format = '[\($state $progress_current/$progress_total\) ](fg:peach bg:surface0)'
@@ -141,22 +139,22 @@ added_style = "green"
 deleted_style = "red"
 
 # --------------------------------------------------------------------------
-# Docker — whale segment
+# Docker
 # --------------------------------------------------------------------------
 [docker_context]
-symbol = "󰡨 "
-format = "[ $symbol$context ](fg:sky bg:crust)"
-style = "fg:sky bg:crust"
+symbol = "◰ "
+format = "[$symbol$context ](sky)"
+style = "sky"
 only_with_files = true
 detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", "compose.yml", "compose.yaml"]
 
 # --------------------------------------------------------------------------
-# Python — snake segment
+# Python
 # --------------------------------------------------------------------------
 [python]
-symbol = " "
-format = '[ $symbol${pyenv_prefix}${version}( \($virtualenv\)) ](fg:yellow bg:crust)'
-style = "fg:yellow bg:crust"
+symbol = "⏣ "
+format = '[$symbol${pyenv_prefix}${version}( \($virtualenv\)) ](yellow)'
+style = "yellow"
 pyenv_version_name = true
 detect_extensions = ["py"]
 detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
@@ -165,19 +163,19 @@ detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.tx
 # Node.js
 # --------------------------------------------------------------------------
 [nodejs]
-symbol = "󰎙 "
-format = "[ $symbol$version ](fg:green bg:crust)"
-style = "fg:green bg:crust"
+symbol = "⬢ "
+format = "[$symbol$version ](green)"
+style = "green"
 detect_extensions = ["js", "mjs", "cjs", "ts"]
 detect_files = ["package.json", ".node-version", ".nvmrc"]
 
 # --------------------------------------------------------------------------
-# AWS — cloud segment
+# AWS
 # --------------------------------------------------------------------------
 [aws]
-symbol = "󰸏 "
-format = '[ $symbol$profile( \($region\)) ](fg:peach bg:crust)'
-style = "fg:peach bg:crust"
+symbol = "☁ "
+format = '[$symbol$profile( \($region\)) ](peach)'
+style = "peach"
 
 [aws.region_aliases]
 us-east-1      = "use1"
@@ -189,11 +187,11 @@ eu-central-1   = "euc1"
 ap-southeast-1 = "apse1"
 
 # --------------------------------------------------------------------------
-# Command duration — right side
+# Command duration
 # --------------------------------------------------------------------------
 [cmd_duration]
 min_time = 3_000
-format = "[󱎫 $duration](peach) "
+format = "[⏱ $duration](peach) "
 style = "peach"
 show_notifications = false
 
@@ -201,23 +199,23 @@ show_notifications = false
 # Background jobs
 # --------------------------------------------------------------------------
 [jobs]
-symbol = "󰜎 "
+symbol = "⚙ "
 format = "[$symbol$number](sapphire) "
 style = "sapphire"
 threshold = 1
 
 # --------------------------------------------------------------------------
-# Exit status — right side
+# Exit status
 # --------------------------------------------------------------------------
 [status]
 disabled = false
-format = "[󰀨 $status](red) "
-symbol = "󰀨"
+format = "[✘ $status](red) "
+symbol = "✘"
 style = "red"
 map_symbol = true
 
 # --------------------------------------------------------------------------
-# Disabled — keep prompt lean
+# Disabled
 # --------------------------------------------------------------------------
 [package]
 disabled = true
