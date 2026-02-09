@@ -96,6 +96,16 @@ install_core_tools() {
     for tool in "${tools[@]}"; do
       brew install "$tool" 2>/dev/null || true
     done
+
+    # Nerd Font patched Monaspace (needed for prompt icons)
+    info "Installing MonaspiceNe Nerd Font..."
+    brew install --cask font-monaspace-nerd-font 2>/dev/null || true
+
+    # Ghostty terminal (macOS cask)
+    if is_macos && ! has ghostty; then
+      info "Installing Ghostty..."
+      brew install --cask ghostty 2>/dev/null || true
+    fi
   elif is_linux && has apt-get; then
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -120,6 +130,19 @@ install_core_tools() {
     fi
     if ! has fd; then
       sudo apt-get install -y -qq fd-find 2>/dev/null && sudo ln -sf "$(which fdfind)" /usr/local/bin/fd || true
+    fi
+
+    # Nerd Font patched Monaspace (needed for prompt icons)
+    local nf_dir="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/NerdFonts"
+    if [[ ! -d "$nf_dir" ]] || ! ls "$nf_dir"/MonaspiceNeNerdFont* &>/dev/null; then
+      info "Installing MonaspiceNe Nerd Font..."
+      mkdir -p "$nf_dir"
+      local nf_version
+      nf_version="$(curl -sL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r .tag_name)"
+      curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/${nf_version}/Monaspace.tar.xz" \
+        | tar xJ -C "$nf_dir" 2>/dev/null \
+        && fc-cache -f "$nf_dir" \
+        || warn "Nerd Font install failed — download manually from github.com/ryanoasis/nerd-fonts"
     fi
   fi
 }
