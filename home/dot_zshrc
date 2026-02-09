@@ -132,8 +132,10 @@ export ZSH_TMUX_AUTOSTART=false       # don't auto-start; we handle it below
 export ZSH_TMUX_AUTOCONNECT=true
 export ZSH_TMUX_UNICODE=true
 
-if command -v tmux &>/dev/null && [[ -z "$TMUX" && -z "$VSCODE_PID" && -z "$INTELLIJ_ENVIRONMENT_READER" ]]; then
-  tmux attach -t default 2>/dev/null || tmux new-session -s default
+# Auto-attach is opt-in: set TMUX_AUTOSTART=1 in ~/.zshrc.local to enable
+if [[ -n "$TMUX_AUTOSTART" ]] && command -v tmux &>/dev/null \
+   && [[ -z "$TMUX" && -z "$VSCODE_PID" && -z "$INTELLIJ_ENVIRONMENT_READER" ]]; then
+  exec tmux new-session -A -s default
 fi
 
 # --------------------------------------------------------------------------
