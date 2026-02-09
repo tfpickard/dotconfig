@@ -49,8 +49,7 @@ github = "jeffreytse/zsh-vi-mode"
 # 6. Navigation & file management
 # ---------------------------------------------------------------------------
 [plugins.zoxide]
-inline = 'eval "$(zoxide init zsh)"'
-apply = ["defer"]
+inline = 'zsh-defer eval "$(zoxide init zsh)"'
 
 [plugins.zsh-autopair]
 github = "hlissner/zsh-autopair"
