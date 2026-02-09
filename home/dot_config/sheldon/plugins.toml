@@ -1,0 +1,211 @@
+shell = "zsh"
+
+# ---------------------------------------------------------------------------
+# Deferred loading framework — must come first
+# ---------------------------------------------------------------------------
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+# ---------------------------------------------------------------------------
+# 1. Completions & suggestions
+# ---------------------------------------------------------------------------
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+apply = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
+
+[plugins.zsh-autocomplete]
+github = "marlonrichert/zsh-autocomplete"
+apply = ["defer"]
+
+# 2. Syntax highlighting (must load after completions)
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+apply = ["defer"]
+
+# 3. History substring search (must load after syntax highlighting)
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 4. Fuzzy finding
+# ---------------------------------------------------------------------------
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 5. Vi mode
+# ---------------------------------------------------------------------------
+[plugins.zsh-vi-mode]
+github = "jeffreytse/zsh-vi-mode"
+
+# ---------------------------------------------------------------------------
+# 6. Navigation & file management
+# ---------------------------------------------------------------------------
+[plugins.zoxide]
+inline = 'eval "$(zoxide init zsh)"'
+apply = ["defer"]
+
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+apply = ["defer"]
+
+[plugins.bd]
+github = "Tarrasch/zsh-bd"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 7. Git
+# ---------------------------------------------------------------------------
+[plugins.forgit]
+github = "wfxr/forgit"
+apply = ["defer"]
+
+[plugins.git-aliases]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/git"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 8. Docker & compose
+# ---------------------------------------------------------------------------
+[plugins.docker-aliases]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/docker"
+apply = ["defer"]
+
+[plugins.docker-compose-aliases]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/docker-compose"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 9. Python / pyenv / virtualenv / pip
+# ---------------------------------------------------------------------------
+[plugins.pyenv-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/pyenv"
+apply = ["defer"]
+
+[plugins.virtualenvwrapper-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/virtualenvwrapper"
+apply = ["defer"]
+
+[plugins.pip-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/pip"
+apply = ["defer"]
+
+[plugins.python-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/python"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 10. Node / npm / nvm / pnpm / bun
+# ---------------------------------------------------------------------------
+[plugins.nvm-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/nvm"
+apply = ["defer"]
+
+[plugins.npm-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/npm"
+apply = ["defer"]
+
+[plugins.zsh-better-npm-completion]
+github = "lukechilds/zsh-better-npm-completion"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 11. AWS
+# ---------------------------------------------------------------------------
+[plugins.aws-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/aws"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 12. systemd
+# ---------------------------------------------------------------------------
+[plugins.systemd-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/systemd"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 13. Homebrew
+# ---------------------------------------------------------------------------
+[plugins.brew-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/brew"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 14. tmux
+# ---------------------------------------------------------------------------
+[plugins.tmux-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/tmux"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 15. SSH
+# ---------------------------------------------------------------------------
+[plugins.ssh-agent-plugin]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/ssh-agent"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 16. colored man pages & dir colors
+# ---------------------------------------------------------------------------
+[plugins.colored-man-pages]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/colored-man-pages"
+apply = ["defer"]
+
+[plugins.zsh-dircolors-solarized]
+github = "joel-porquet/zsh-dircolors-solarized"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 17. Clipboard & system
+# ---------------------------------------------------------------------------
+[plugins.copybuffer]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/copybuffer"
+apply = ["defer"]
+
+[plugins.copypath]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/copypath"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 18. Notifications for long-running commands
+# ---------------------------------------------------------------------------
+[plugins.zsh-notify]
+github = "marzocchi/zsh-notify"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# 19. You-should-use — reminds you of existing aliases
+# ---------------------------------------------------------------------------
+[plugins.you-should-use]
+github = "MichaelAqworter/zsh-you-should-use"
+apply = ["defer"]
+
+# ---------------------------------------------------------------------------
+# Templates
+# ---------------------------------------------------------------------------
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"

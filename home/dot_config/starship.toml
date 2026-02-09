@@ -1,0 +1,210 @@
+# ==========================================================================
+#  Starship prompt — clean, colorful, informative
+#  Docs: https://starship.rs/config/
+# ==========================================================================
+
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$git_metrics\
+$docker_context\
+$python\
+$nodejs\
+$aws\
+$env_var\
+$cmd_duration\
+$jobs\
+$status\
+$line_break\
+$character"""
+
+# Prompt on two lines: info on top, input on bottom
+add_newline = true
+
+# --------------------------------------------------------------------------
+# Character (vi mode indicator)
+# --------------------------------------------------------------------------
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold blue)"
+vimcmd_replace_one_symbol = "[❮](bold purple)"
+vimcmd_replace_symbol = "[❮](bold purple)"
+vimcmd_visual_symbol = "[❮](bold yellow)"
+
+# --------------------------------------------------------------------------
+# OS icon
+# --------------------------------------------------------------------------
+[os]
+disabled = false
+style = "bold white"
+
+[os.symbols]
+Macos = " "
+Linux = " "
+Ubuntu = " "
+Debian = " "
+Fedora = " "
+Arch = " "
+Alpine = " "
+Amazon = " "
+CentOS = " "
+Raspbian = " "
+Windows = " "
+
+# --------------------------------------------------------------------------
+# Username & hostname — show on remote / root
+# --------------------------------------------------------------------------
+[username]
+show_always = false
+format = "[$user]($style)"
+style_user = "bold cyan"
+style_root = "bold red"
+
+[hostname]
+ssh_only = true
+format = "[@$hostname]($style) "
+style = "bold cyan"
+trim_at = "."
+
+# --------------------------------------------------------------------------
+# Directory
+# --------------------------------------------------------------------------
+[directory]
+truncation_length = 4
+truncation_symbol = "…/"
+truncate_to_repo = true
+style = "bold blue"
+read_only = " 🔒"
+read_only_style = "red"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Projects" = " "
+
+# --------------------------------------------------------------------------
+# Git
+# --------------------------------------------------------------------------
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+style = "bold purple"
+truncation_length = 30
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold yellow"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "*${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold yellow"
+
+[git_metrics]
+disabled = false
+format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
+added_style = "bold green"
+deleted_style = "bold red"
+
+# --------------------------------------------------------------------------
+# Languages & tools
+# --------------------------------------------------------------------------
+[python]
+symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+pyenv_version_name = true
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
+
+[nodejs]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "bold green"
+detect_extensions = ["js", "mjs", "cjs", "ts"]
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[aws]
+symbol = " "
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+style = "bold 208"
+[aws.region_aliases]
+us-east-1 = "use1"
+us-east-2 = "use2"
+us-west-1 = "usw1"
+us-west-2 = "usw2"
+eu-west-1 = "euw1"
+eu-central-1 = "euc1"
+ap-southeast-1 = "apse1"
+
+[docker_context]
+symbol = " "
+format = "[$symbol$context]($style) "
+style = "bold 39"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", "compose.yml", "compose.yaml"]
+
+# --------------------------------------------------------------------------
+# Command duration
+# --------------------------------------------------------------------------
+[cmd_duration]
+min_time = 3_000
+format = "took [$duration]($style) "
+style = "bold 214"
+show_notifications = false
+
+# --------------------------------------------------------------------------
+# Background jobs
+# --------------------------------------------------------------------------
+[jobs]
+symbol = " "
+format = "[$symbol$number]($style) "
+style = "bold 39"
+threshold = 1
+
+# --------------------------------------------------------------------------
+# Exit status
+# --------------------------------------------------------------------------
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+symbol = "✖ "
+style = "bold red"
+map_symbol = true
+
+# --------------------------------------------------------------------------
+# Modules disabled for cleanliness (enable as needed)
+# --------------------------------------------------------------------------
+[package]
+disabled = true
+
+[terraform]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[battery]
+disabled = true
